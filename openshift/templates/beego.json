@@ -2,23 +2,23 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "hugo-golang",
+    "name": "my-hugo-blog",
     "annotations": {
-      "description": "A Hugo Webframework in Go-lang",
+      "description": "My Blog using Hugo",
       "tags": "quickstart,golang",
       "iconClass": "icon-go-gopher"
     }
   },
   "labels": {
-      "template": "hugo-example",
-      "app": "huggo"
+      "template": "my-hugo-blog",
+      "app": "my-hugo-blog"
   },
   "objects": [
     {
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
-        "name": "hugo-example",
+        "name": "my-hugo-blog",
         "annotations": {
           "description": "Exposes and load balances the application pods"
         }
@@ -32,7 +32,7 @@
           }
         ],
         "selector": {
-          "name": "hugo-example"
+          "name": "my-hugo-blog"
         }
       }
     },
@@ -40,13 +40,13 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "hugo-example"
+        "name": "my-hugo-blog"
       },
       "spec": {
         "host": "${APPLICATION_DOMAIN}",
         "to": {
           "kind": "Service",
-          "name": "hugo-example"
+          "name": "my-hugo-blog"
         }
       }
     },
@@ -54,7 +54,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "hugo-example",
+        "name": "my-hugo-blog",
         "annotations": {
           "description": "Keeps track of changes in the application image"
         }
@@ -64,7 +64,7 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "hugo-example",
+        "name": "my-hugo-blog",
         "annotations": {
           "description": "Defines how to build the application"
         }
@@ -84,7 +84,7 @@
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "rhel76:latest"
+            "name": "hugo/blog:latest"
           }
         },
         "triggers": [
@@ -98,16 +98,13 @@
             }
           }
         ],
-        "postCommit": {
-          "script": "go test -v ./..."
-        }
       }
     },
     {
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "hugo-example",
+        "name": "my-hugo-blog",
         "annotations": {
           "description": "Defines how to deploy the application server"
         }
@@ -122,11 +119,11 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "hugo-example"
+                "my-hugo-blog"
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "rhel76:latest"
+                "name": "blog:latest"
               }
             }
           },
@@ -136,20 +133,20 @@
         ],
         "replicas": 1,
         "selector": {
-          "name": "hugo-example"
+          "name": "my-hugo-blog"
         },
         "template": {
           "metadata": {
-            "name": "hugo-example",
+            "name": "my-hugo-blog",
             "labels": {
-              "name": "hugo-example"
+              "name": "my-hugo-blog"
             }
           },
           "spec": {
             "containers": [
               {
-                "name": "hugo-example",
-                "image": "hugo-example",
+                "name": "my-hugo-blog",
+                "image": "my-hugo-blog",
                 "ports": [
                   {
                     "containerPort": 1313
@@ -166,7 +163,7 @@
     {
       "name": "SOURCE_REPOSITORY_URL",
       "description": "The URL of the repository with your application source code",
-      "value": "https://github.com/openshift/golang-ex.git"
+      "value": "https://github.com/AppelonD/golang.git"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",
