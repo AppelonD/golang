@@ -84,7 +84,7 @@
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "blog"
+            "name": "blog:latest"
           }
         },
         "triggers": [
