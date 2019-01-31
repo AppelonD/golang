@@ -2,7 +2,7 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "my-hugo-blog",
+    "name": "blog",
     "annotations": {
       "description": "My Blog using Hugo",
       "tags": "quickstart,golang",
